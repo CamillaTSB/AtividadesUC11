@@ -1,6 +1,6 @@
 # Projeto - Leilões TDS
 
-Projeto de software referente à Atividade 1 - Casa de Leilões.
+Projeto de software referente à Atividade 2 - Casa de Leilões.
 
 ## Tecnologias utilizadas
 
