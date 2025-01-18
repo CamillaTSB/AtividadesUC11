@@ -1,12 +1,10 @@
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class listagemVIEW extends javax.swing.JFrame {
 
-    /**
-     * Creates new form listagemVIEW
-     */
     public listagemVIEW() {
         initComponents();
         listarProdutos();
@@ -122,20 +120,41 @@ public class listagemVIEW extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
-        String id = id_produto_venda.getText();
+        String idTexto = id_produto_venda.getText();
 
-        ProdutosDAO produtosdao = new ProdutosDAO();
+        if (idTexto.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, insira o ID do produto.");
+            return;
+        }
 
-        //produtosdao.venderProduto(Integer.parseInt(id));
+        try {
+            int id = Integer.parseInt(idTexto);
+            ProdutosDAO produtosdao = new ProdutosDAO();
+            boolean sucesso = produtosdao.venderProduto(id);
+            if (sucesso) {
+                JOptionPane.showMessageDialog(this, "Produto vendido com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao vender produto. Verifique se o ID é válido.");
+            }
+            listarProdutos();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "ID inválido. Digite apenas números.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao processar a venda: " + e.getMessage());
+        }
+
         listarProdutos();
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        //vendasVIEW vendas = new vendasVIEW(); 
-        //vendas.setVisible(true);
+        vendasVIEW vendas = new vendasVIEW();
+        vendas.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        cadastroVIEW cadastro = new cadastroVIEW();
+        cadastro.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
