@@ -4,12 +4,12 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class listagemVIEW extends javax.swing.JFrame {
-    
+
     public listagemVIEW() {
         initComponents();
         listarProdutos();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -121,12 +121,12 @@ public class listagemVIEW extends javax.swing.JFrame {
 
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
         String idTexto = id_produto_venda.getText();
-        
+
         if (idTexto.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, insira o ID do produto.");
             return;
         }
-        
+
         try {
             int id = Integer.parseInt(idTexto);
             ProdutosDAO produtosdao = new ProdutosDAO();
@@ -142,19 +142,22 @@ public class listagemVIEW extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao processar a venda: " + e.getMessage());
         }
-        
+
         listarProdutos();
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        //vendasVIEW vendas = new vendasVIEW(); 
-        //vendas.setVisible(true);
+        vendasVIEW vendas = new vendasVIEW();
+        vendas.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        cadastroVIEW cadastro = new cadastroVIEW();
+        cadastro.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
-    
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -201,12 +204,12 @@ public class listagemVIEW extends javax.swing.JFrame {
     private void listarProdutos() {
         try {
             ProdutosDAO produtosdao = new ProdutosDAO();
-            
+
             DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
             model.setNumRows(0);
-            
+
             ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutos();
-            
+
             for (int i = 0; i < listagem.size(); i++) {
                 model.addRow(new Object[]{
                     listagem.get(i).getId(),
@@ -217,6 +220,6 @@ public class listagemVIEW extends javax.swing.JFrame {
             }
         } catch (Exception e) {
         }
-        
+
     }
 }

@@ -1,7 +1,14 @@
+
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 public class vendasVIEW extends javax.swing.JFrame {
 
     public vendasVIEW() {
         initComponents();
+        listarProdutosVendidos();
     }
 
     @SuppressWarnings("unchecked")
@@ -116,4 +123,27 @@ public class vendasVIEW extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblVendas;
     // End of variables declaration//GEN-END:variables
+
+
+ private void listarProdutosVendidos() {
+        try {
+            ProdutosDAO produtosdao = new ProdutosDAO();
+
+            DefaultTableModel model = (DefaultTableModel) tblVendas.getModel();
+            model.setNumRows(0);
+            ArrayList<ProdutosDTO> listagemVendidos = produtosdao.listarProdutosVendidos();
+
+            for (int i = 0; i < listagemVendidos.size(); i++) {
+                model.addRow(new Object[]{
+                    listagemVendidos.get(i).getId(),
+                    listagemVendidos.get(i).getNome(),
+                    listagemVendidos.get(i).getValor(),
+                    listagemVendidos.get(i).getStatus()
+                });
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao listar produtos vendidos: " + e.getMessage());
+        }
+    }
+ 
 }
