@@ -29,10 +29,7 @@ public class listagemVIEW extends javax.swing.JFrame {
 
         listaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "Nome", "Valor", "Status"
@@ -145,13 +142,15 @@ public class listagemVIEW extends javax.swing.JFrame {
 
         listarProdutos();
     }//GEN-LAST:event_btnVenderActionPerformed
-
+    
+    //Acesso à tela de Vendas - produtos vendidos
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
         vendasVIEW vendas = new vendasVIEW();
         vendas.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVendasActionPerformed
-
+    
+    //Voltar para tela de Cadastro 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         cadastroVIEW cadastro = new cadastroVIEW();
         cadastro.setVisible(true);
