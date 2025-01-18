@@ -65,7 +65,7 @@ public class ProdutosDAO {
         return listagem;
     }
 
-    public void venderProduto(int idProduto) {
+    public boolean venderProduto(int idProduto) {
         conn = new conectaDAO().connectDB();
         String sql = "UPDATE produtos SET status = 'Vendido' WHERE id = ?";
         
@@ -88,6 +88,7 @@ public class ProdutosDAO {
                 System.out.println("Erro ao fechar conexão: " + e.getMessage());
             }
         }
+        return false;
     }
     
     
